@@ -1,5 +1,7 @@
 # **Placebo Palace**
 
+![Placebo Palace Logo](assets/drugs.webp)
+
 Welcome to **Placebo Palace**, an online shop for drugs. This repository contains the **backend API** for the online shop.
 
 ## **Features**
