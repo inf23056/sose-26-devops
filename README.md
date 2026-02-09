@@ -61,3 +61,118 @@ go run main.go
   * Username: `user`
   * Password: `pass`
 * Include the returned JWT token in `Authorization: Bearer <token>` for protected endpoints
+
+## Git Conventions
+
+### 1. Commit Messages
+
+**Recommended Format:**
+
+&lt;type&gt;(&lt;scope&gt;): &lt;short description in present tense&gt;
+
+&lt;optional: longer explanation&gt;
+
+&lt;optional: footer (Issues, Breaking Changes)&gt;
+
+**Tense & Style**
+
+Present tense, imperative:
+
+- add login validation
+- fix null pointer in payment service
+- remove deprecated API endpoint
+
+Not recommended:
+
+- added login validation
+- fixes bug
+- login validation added
+
+**Types**
+
+| Type     | Meaning                                  |
+|----------|------------------------------------------|
+| feat     | New feature                              |
+| fix      | Bug fix                                  |
+| docs     | Documentation                            |
+| style    | Formatting (no logic change)             |
+| refactor | Code restructuring                       |
+| test     | Tests                                    |
+| chore    | Build, CI, Dependencies                  |
+| perf     | Performance improvement                  |
+
+**Examples:**
+
+Simple commits:
+- `feat(auth): add JWT refresh token functionality`
+- `fix(api): handle empty response in user endpoint`
+- `docs(readme): update installation instructions`
+- `chore(deps): delve to v1.22.0`
+
+With scope and detailed description:
+- `feat(user-profile): add avatar upload with image validation`
+- `fix(checkout): prevent duplicate payment submissions`
+- `refactor(api): extract validation logic into separate service`
+- `perf(database): add index on user_id for faster queries`
+
+Multi-line commit with body:
+```
+feat(auth): implement two-factor authentication
+
+Add SMS and authenticator app support for 2FA.
+Users can enable this in account settings.
+```
+
+Breaking changes:
+```
+feat(api)!: change user endpoint response structure
+
+BREAKING CHANGE: The user endpoint now returns `userData` 
+instead of `user` to align with other endpoints.
+```
+
+---
+
+### 2. Branch Names
+
+**General Pattern:**
+
+&lt;type&gt;/&lt;short-description&gt;
+
+**Common Types:**
+
+- feature/
+- bugfix/
+- hotfix/
+- release/
+- chore/
+- experiment/
+
+**Examples:**
+
+Feature branches:
+- `feature/user-authentication`
+- `feature/123-add-payment-integration`
+- `feature/dashboard-redesign`
+
+Bugfix branches:
+- `bugfix/456-fix-login-redirect`
+- `bugfix/null-pointer-in-cart`
+- `bugfix/safari-css-rendering`
+
+Hotfix branches:
+- `hotfix/payment-timeout`
+- `hotfix/critical-security-patch`
+- `hotfix/database-connection-leak`
+
+Release and chore branches:
+- `release/v2.1.0`
+- `chore/update-dependencies`
+- `chore/migrate-to-typescript`
+
+**Rules:**
+
+- all lowercase  
+- use hyphens, no spaces  
+- keep it short but clear
+- optionally prefix with ticket/issue number
