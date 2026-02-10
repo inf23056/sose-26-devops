@@ -1,4 +1,4 @@
-module github.com/robinlieb/devops-lecture-project-2026
+module github.com/inf23056/sose-26-devops
 
 go 1.25.7
 
