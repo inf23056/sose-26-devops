@@ -142,7 +142,7 @@ instead of `user` to align with other endpoints.
 **Common Types:**
 
 - feature/
-- bugfix
+- bugfix/
 - hotfix/
 - release/
 - chore/
