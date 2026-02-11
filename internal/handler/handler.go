@@ -21,7 +21,7 @@ var products = []helpers.Product{
 	{ID: 7, Name: "Chill Puff", Price: 13.99},
 	{ID: 8, Name: "Partypillz", Price: 6.99},
 	{ID: 9, Name: "Magic Dust", Price: 30.99},
-	{ID: 9, Name: "Moonrocks", Price: 34.99},
+	{ID: 10, Name: "Moonrocks", Price: 34.99},
 }
 
 func AuthLoginHandler(w http.ResponseWriter, r *http.Request) {
