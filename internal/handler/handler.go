@@ -6,14 +6,21 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+
 	"github.com/inf23056/sose-26-devops/pkg/helpers"
 )
 
 // Static data for three products
 var products = []helpers.Product{
-	{ID: 1, Name: "Product 1", Price: 19.99},
-	{ID: 2, Name: "Product 2", Price: 29.99},
-	{ID: 3, Name: "Product 3", Price: 39.99},
+	{ID: 1, Name: "Kiffgras", Price: 10.00},
+	{ID: 2, Name: "KaterFix", Price: 16.99},
+	{ID: 3, Name: "Painkillaz", Price: 8.99},
+	{ID: 4, Name: "Straßenzucker", Price: 40.00},
+	{ID: 5, Name: "Straßenzucker", Price: 40.00},
+	{ID: 5, Name: "Straßenzucker", Price: 40.00},
+	{ID: 7, Name: "Straßenzucker", Price: 40.00},
+	{ID: 4, Name: "Straßenzucker", Price: 40.00},
+	{ID: 4, Name: "Straßenzucker", Price: 40.00},
 }
 
 func AuthLoginHandler(w http.ResponseWriter, r *http.Request) {
