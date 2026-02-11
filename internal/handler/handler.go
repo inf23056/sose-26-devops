@@ -12,15 +12,16 @@ import (
 
 // Static data for three products
 var products = []helpers.Product{
-	{ID: 1, Name: "Kiffgras", Price: 10.00},
-	{ID: 2, Name: "KaterFix", Price: 16.99},
+	{ID: 1, Name: "NPC Energy", Price: 10.00},
+	{ID: 2, Name: "Cosmic Calm", Price: 16.99},
 	{ID: 3, Name: "Painkillaz", Price: 8.99},
-	{ID: 4, Name: "Straßenzucker", Price: 40.00},
-	{ID: 5, Name: "Straßenzucker", Price: 40.00},
-	{ID: 5, Name: "Straßenzucker", Price: 40.00},
-	{ID: 7, Name: "Straßenzucker", Price: 40.00},
-	{ID: 4, Name: "Straßenzucker", Price: 40.00},
-	{ID: 4, Name: "Straßenzucker", Price: 40.00},
+	{ID: 4, Name: "Streetsugar", Price: 39.99},
+	{ID: 5, Name: "Aura-Oil", Price: 3.99},
+	{ID: 6, Name: "Focus+", Price: 8.99},
+	{ID: 7, Name: "Chill Puff", Price: 13.99},
+	{ID: 8, Name: "Partypillz", Price: 6.99},
+	{ID: 9, Name: "Magic Dust", Price: 30.99},
+	{ID: 9, Name: "Moonrocks", Price: 34.99},
 }
 
 func AuthLoginHandler(w http.ResponseWriter, r *http.Request) {
