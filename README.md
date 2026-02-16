@@ -176,3 +176,19 @@ Release and chore branches:
 - use hyphens, no spaces  
 - keep it short but clear
 - optionally prefix with ticket/issue number
+
+## Docker
+
+Docker Hub:
+
+ [inf23056/sose-26-devops](https://hub.docker.com/repository/docker/inf23056/sose-26-devops/general)
+
+
+### Build
+
+docker build -t sose-26-devops:`major.minor.patch` 
+
+### Run
+
+docker run -p 8080:8080 sose-26-devops:`major.minor.patch`
+
