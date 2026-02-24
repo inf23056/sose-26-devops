@@ -49,7 +49,7 @@ go run ${SERVICE}/cmd/main.go
 ```
    Please specify which service you want in `${SERVICE}` to execute, e.g. `auth-service`.
 
-5. **Accessing the API**
+4. **Accessing the API**
 
    Server will run on `http://localhost:8080`. Use Postman, curl or any other API client to test the endpoints.
 
@@ -176,18 +176,25 @@ Release and chore branches:
 - keep it short but clear
 - optionally prefix with ticket/issue number
 
-## Docker
+# Docker
 
-Docker Hub:
+## 1. Link to Docker Hub:
 
  [inf23056/sose-26-devops](https://hub.docker.com/repository/docker/inf23056/sose-26-devops/general)
 
 
-### Build
+## 2. Build
 
-docker build -t sose-26-devops:`major.minor.patch` 
 
-### Run
+### Authentication Service
+docker build --build-arg SERVICE=auth-service -t `image-name` .
 
+### Product Service  
+docker build --build-arg SERVICE=product-service -t `image-name` .
+
+### Checkout Service
+docker build --build-arg SERVICE=checkout-service -t `image-name` .
+
+## 3. Run
 docker run -p 8080:8080 sose-26-devops:`major.minor.patch`
 
