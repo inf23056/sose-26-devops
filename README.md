@@ -198,3 +198,15 @@ docker build --build-arg SERVICE=checkout-service -t `image-name` .
 ## 3. Run
 docker run -p 8080:8080 sose-26-devops:`major.minor.patch`
 
+# Makefile
+
+Using 
+
+
+```bash
+make build service=${SERVICE}
+```
+
+will build an executable regarding the chosen `${SERVICE}` in the `out` folder.
+
+This way, you can then just use `out/${SERVICE}` to start the service.
