@@ -1,19 +1,13 @@
 package helpers
 
 import (
-	"time"
 	"fmt"
+	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
 var secretKey = []byte("secret-key")
-
-type Product struct {
-	ID    int     `json:"id"`
-	Name  string  `json:"name"`
-	Price float64 `json:"price"`
-}
 
 func CreateToken(username string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256,
@@ -35,15 +29,5 @@ func VerifyToken(tokenString string) bool {
 		}
 		return secretKey, nil
 	})
-
 	return err == nil && token.Valid
-}
-
-func FindProductByID(products []Product, id int) *Product {
-	for _, product := range products {
-		if product.ID == id {
-			return &product
-		}
-	}
-	return nil
 }

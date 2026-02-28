@@ -2,7 +2,13 @@
 
 ![Placebo Palace Logo](assets/drugs.webp)
 
-Welcome to **Placebo Palace**, an online shop for drugs. This repository contains the **backend API** for the online shop.
+Welcome to **Placebo Palace**, an online shop for drugs. This repository contains the **backend APIs** for the online shop.
+
+A microservices architecture is being used. At the moment, these services are offered:
+ - auth-service
+ - product-service
+ - checkout-service
+ <!-- add new services here! -->
 
 ## **Features**
 
@@ -36,21 +42,14 @@ cd sose-26-devops
 go mod tidy
 ```
 
-3. **Debugging**
-
-   Please note that a valid and compatible Delve installation is necessary for this.
-
-   In order to debug, use Visual Studio Code as IDE. A `launch.json` is set up in the `.vscode` folder which starts the Go server and passes through environment variables (e.g. the path to dlv for Delve).
-
-   
-
-4. **Run the server**
+3. **Run a service**
 
 ```bash
-go run main.go
+go run ${SERVICE}/cmd/main.go
 ```
+   Please specify which service you want in `${SERVICE}` to execute, e.g. `auth-service`.
 
-5. **Access the API**
+4. **Accessing the API**
 
    Server will run on `http://localhost:8080`. Use Postman, curl or any other API client to test the endpoints.
 
@@ -177,18 +176,37 @@ Release and chore branches:
 - keep it short but clear
 - optionally prefix with ticket/issue number
 
-## Docker
+# Docker
 
-Docker Hub:
+## 1. Link to Docker Hub:
 
  [inf23056/sose-26-devops](https://hub.docker.com/repository/docker/inf23056/sose-26-devops/general)
 
 
-### Build
+## 2. Build
 
-docker build -t sose-26-devops:`major.minor.patch` 
 
-### Run
+### Authentication Service
+docker build --build-arg SERVICE=auth-service -t `image-name` .
 
+### Product Service  
+docker build --build-arg SERVICE=product-service -t `image-name` .
+
+### Checkout Service
+docker build --build-arg SERVICE=checkout-service -t `image-name` .
+
+## 3. Run
 docker run -p 8080:8080 sose-26-devops:`major.minor.patch`
 
+# Makefile
+
+Using 
+
+
+```bash
+make build service=${SERVICE}
+```
+
+will build an executable regarding the chosen `${SERVICE}` in the `out` folder.
+
+This way, you can then just use `out/${SERVICE}` to start the service.
