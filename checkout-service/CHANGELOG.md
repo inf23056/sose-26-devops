@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/inf23056/sose-26-devops/compare/checkout-service-1.2.0...checkout-service-1.3.0) (2026-03-02)
+
+
+### Features
+
+* **dockerhub:** rollback services for release-please to create seman… ([2c94ba2](https://github.com/inf23056/sose-26-devops/commit/2c94ba257196f59b7c07438a054397095093e4ad))
+* **dockerhub:** rollback services for release-please to create semantic versioning ([820ef3c](https://github.com/inf23056/sose-26-devops/commit/820ef3ced53f6c27fd02be494b1afedb6a5d9daf))
+
 ## [1.2.0](https://github.com/inf23056/sose-26-devops/compare/checkout-service-1.1.0...checkout-service-1.2.0) (2026-03-02)
 
 
