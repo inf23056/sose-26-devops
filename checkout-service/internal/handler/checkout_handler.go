@@ -31,5 +31,5 @@ func CheckoutPlaceOrderHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`{"error":"Invalid token"}`))
 		return
 	}
-	w.Write([]byte(`{"message":"Order placed successfully!"}`))
+	w.Write([]byte(`{"message":"Order placed successfully"}`))
 }
