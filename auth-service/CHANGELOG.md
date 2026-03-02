@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/inf23056/sose-26-devops/compare/auth-service-1.1.0...auth-service-1.2.0) (2026-03-02)
+
+
+### Features
+
+* **dockerhub:** update services for release-please to create semanti… ([da0399f](https://github.com/inf23056/sose-26-devops/commit/da0399fd52fa0143cceae0afd6e13bf326223577))
+* **dockerhub:** update services for release-please to create semantic versioning ([5eec163](https://github.com/inf23056/sose-26-devops/commit/5eec163eb9d47f040086f4e8d1df19e45dfb08ba))
+
 ## [1.1.0](https://github.com/inf23056/sose-26-devops/compare/auth-service-1.0.0...auth-service-1.1.0) (2026-03-02)
 
 
