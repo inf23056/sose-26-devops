@@ -3,7 +3,7 @@
  "release-type": "simple",
  "include-v-in-tag": false,
  "packages": {
-    "authentication-service": {
+    "auth-service": {
     "package-name": "auth-service",
     "release-type": "go"
     },
