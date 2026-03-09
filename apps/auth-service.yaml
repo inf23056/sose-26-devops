@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 'auth-service'
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/inf23056/sose-26-devops.git
+    path: Kubernetes/auth-service
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: webshop
+  syncPolicy:
+    automated:
+      enabled: true
+    syncOptions:
+      - CreateNamespace=true
