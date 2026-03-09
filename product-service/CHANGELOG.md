@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/inf23056/sose-26-devops/compare/product-service-1.3.0...product-service-1.4.0) (2026-03-09)
+
+
+### Features
+
+* **kubernetes:** add deployment and service yaml-data ([b3aee93](https://github.com/inf23056/sose-26-devops/commit/b3aee9385dbe469304e8d7cb2d13c6581aa76d7a))
+
 ## [1.3.0](https://github.com/inf23056/sose-26-devops/compare/product-service-1.2.0...product-service-1.3.0) (2026-03-02)
 
 
