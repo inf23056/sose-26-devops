@@ -210,3 +210,18 @@ make build service=${SERVICE}
 will build an executable regarding the chosen `${SERVICE}` in the `out` folder.
 
 This way, you can then just use `out/${SERVICE}` to start the service.
+
+
+# GitOps / Argo CD
+
+## Deploy to Local Cluster
+
+Make sure [Argo CD is installed](https://argo-cd.readthedocs.io/en/stable/getting_started/) in your local cluster and you are logged in.
+
+Apply all Argo CD Applications:
+
+```bash
+kubectl -n argocd apply -f apps/
+```
+
+This will register all applications defined in the `apps/` directory with Argo CD, which then syncs the workloads onto your local cluster.
