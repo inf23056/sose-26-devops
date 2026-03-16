@@ -149,7 +149,7 @@ grafana:
                   {
                     "editorMode": "code",
                     "expr": "sum by (service) (\n  label_replace(\n    rate(container_cpu_usage_seconds_total{namespace=\"webshop\"}[5m]),\n    \"service\", \"$1\", \"pod\", \"^(.*)-deployment-.*$\"\n  )\n)",
-                    "legendFormat": "{{`{{`}} service {{`}}`}}",
+                    "legendFormat": "{{service}}",
                     "range": true,
                     "refId": "A"
                   }
