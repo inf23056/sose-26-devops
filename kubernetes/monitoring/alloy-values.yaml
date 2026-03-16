@@ -1,0 +1,56 @@
+alloy:
+  clustering:
+    enabled: false
+
+  configMap:
+    content: |
+      // Node CPU/RAM Metriken via cAdvisor
+      discovery.kubernetes "nodes" {
+        role = "node"
+      }
+
+      discovery.relabel "cadvisor" {
+        targets = discovery.kubernetes.nodes.targets
+        rule {
+          source_labels = ["__address__"]
+          regex         = "([^:]+)(?::\\d+)?"
+          replacement   = "$1:10250"
+          target_label  = "__address__"
+        }
+        rule {
+          source_labels = ["__meta_kubernetes_node_name"]
+          target_label  = "node"
+        }
+        rule {
+          replacement  = "/metrics/cadvisor"
+          target_label = "__metrics_path__"
+        }
+      }
+
+      prometheus.scrape "cadvisor" {
+        targets    = discovery.relabel.cadvisor.output
+        job_name   = "cadvisor"
+        scheme     = "https"
+        bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+        scrape_interval = "30s"
+        tls_config {
+          insecure_skip_verify = true
+        }
+        forward_to = [prometheus.remote_write.mimir.receiver]
+      }
+
+      // Remote Write zu Mimir
+      prometheus.remote_write "mimir" {
+        endpoint {
+          url = "http://lgtm-stack-mimir-nginx.monitoring.svc:80/api/v1/push"
+          headers = {
+            "X-Scope-OrgID" = "anonymous",
+          }
+        }
+      }
+
+  rbac:
+    create: true
+
+  serviceAccount:
+    create: true
