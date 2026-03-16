@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/inf23056/sose-26-devops.git
-    path: Kubernetes/auth-service
+    path: kubernetes/auth-service
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc

@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/inf23056/sose-26-devops.git
-    path: Kubernetes/checkout-service
+    path: kubernetes/checkout-service
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc

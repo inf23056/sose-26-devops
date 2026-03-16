@@ -1,0 +1,80 @@
+# ─────────────────────────────────────────
+# GRAFANA – Dashboard + zusätzliche Datenquelle
+# ─────────────────────────────────────────
+grafana:
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        # Mimir (Metriken) – bereits intern vorhanden, explizit konfiguriert
+        - name: Mimir
+          type: prometheus
+          url: http://{{ .Release.Name }}-mimir-nginx.monitoring.svc:80/prometheus
+          isDefault: true
+          access: proxy
+          editable: false
+        # Loki (Logs) – zusätzliche Datenquelle
+        - name: Loki
+          type: loki
+          url: http://{{ .Release.Name }}-loki-gateway.monitoring.svc:80
+          access: proxy
+          editable: false
+        # Tempo (Traces) – zusätzliche Datenquelle
+        - name: Tempo
+          type: tempo
+          url: http://{{ .Release.Name }}-tempo.monitoring.svc:3100
+          access: proxy
+          editable: false
+
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: default
+          orgId: 1
+          folder: ""
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+
+  dashboards:
+    default:
+      cluster-cpu:
+        json: |
+          {
+            "title": "Cluster CPU Usage",
+            "uid": "cluster-cpu",
+            "panels": [
+              {
+                "type": "timeseries",
+                "title": "CPU Usage (all nodes)",
+                "datasource": "Mimir",
+                "targets": [
+                  {
+                    "expr": "sum(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])) by (node)",
+                    "legendFormat": "{{node}}"
+                  }
+                ],
+                "gridPos": { "h": 8, "w": 24, "x": 0, "y": 0 }
+              }
+            ],
+            "schemaVersion": 36,
+            "version": 1
+          }
+
+# ─────────────────────────────────────────
+# TEMPO – Replica-Anzahl anpassen
+# ─────────────────────────────────────────
+tempo:
+  distributor:
+    replicas: 2
+  ingester:
+    replicas: 3
+  querier:
+    replicas: 2
+  queryFrontend:
+    replicas: 1
+  compactor:
+    replicas: 1
