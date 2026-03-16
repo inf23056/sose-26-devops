@@ -39,28 +39,136 @@ grafana:
           options:
             path: /var/lib/grafana/dashboards/default
 
-  dashboards:
+    dashboards:
     default:
-      cluster-cpu:
+      webshop-services:
         json: |
           {
-            "title": "Cluster CPU Usage",
-            "uid": "cluster-cpu",
+            "annotations": {
+              "list": [
+                {
+                  "builtIn": 1,
+                  "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                  },
+                  "enable": true,
+                  "hide": true,
+                  "iconColor": "rgba(0, 211, 255, 1)",
+                  "name": "Annotations & Alerts",
+                  "type": "dashboard"
+                }
+              ]
+            },
+            "editable": true,
+            "fiscalYearStartMonth": 0,
+            "graphTooltip": 0,
+            "id": 1,
+            "links": [],
             "panels": [
               {
-                "type": "timeseries",
-                "title": "CPU Usage (all nodes)",
                 "datasource": "Mimir",
+                "fieldConfig": {
+                  "defaults": {
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "barWidthFactor": 0.6,
+                      "drawStyle": "line",
+                      "fillOpacity": 0,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 1,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "auto",
+                      "showValues": false,
+                      "spanNulls": false,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 8,
+                  "w": 24,
+                  "x": 0,
+                  "y": 0
+                },
+                "id": 1,
+                "options": {
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                  }
+                },
+                "pluginVersion": "12.2.1",
                 "targets": [
                   {
-                    "expr": "sum(rate(container_cpu_usage_seconds_total{container!=\"\"}[5m])) by (node)",
-                    "legendFormat": "{{node}}"
+                    "editorMode": "code",
+                    "expr": "sum by (service) (\n  label_replace(\n    rate(container_cpu_usage_seconds_total{namespace=\"webshop\"}[5m]),\n    \"service\", \"$1\", \"pod\", \"^(.*)-deployment-.*$\"\n  )\n)",
+                    "legendFormat": "{{ service }}",
+                    "range": true,
+                    "refId": "A"
                   }
                 ],
-                "gridPos": { "h": 8, "w": 24, "x": 0, "y": 0 }
+                "title": "CPU Usage (by service)",
+                "type": "timeseries"
               }
             ],
-            "schemaVersion": 36,
+            "preload": false,
+            "refresh": "",
+            "schemaVersion": 42,
+            "tags": [],
+            "templating": {
+              "list": []
+            },
+            "timepicker": {},
+            "timezone": "",
+            "title": "Service CPU Usage",
+            "uid": "service-cpu",
             "version": 1
           }
 
