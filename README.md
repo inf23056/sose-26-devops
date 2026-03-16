@@ -187,13 +187,13 @@ Release and chore branches:
 
 
 ### Authentication Service
-docker build --build-arg SERVICE=auth-service -t `image-name` .
+docker build --build-arg SERVICE=auth-service -t `auth-service` .
 
 ### Product Service  
-docker build --build-arg SERVICE=product-service -t `image-name` .
+docker build --build-arg SERVICE=product-service -t `product-service` .
 
 ### Checkout Service
-docker build --build-arg SERVICE=checkout-service -t `image-name` .
+docker build --build-arg SERVICE=checkout-service -t `checkout-service` .
 
 ## 3. Run
 docker run -p 8080:8080 sose-26-devops:`major.minor.patch`
