@@ -225,3 +225,51 @@ kubectl -n argocd apply -f apps/
 ```
 
 This will register all applications defined in the `apps/` directory with Argo CD, which then syncs the workloads onto your local cluster.
+
+# Grafana Dashboard (LGTM Stack via Argo CD)
+
+Make sure Argo CD is installed and running before proceeding (see [GitOps / Argo CD](#gitops--argo-cd)).
+
+## 1. Deploy the LGTM Stack
+
+```bash
+kubectl apply -f apps/lgtm-stack.yaml
+kubectl apply -f apps/alloy.yaml
+```
+
+## 2. Wait for Pods
+
+```bash
+kubectl get pods -n monitoring -w
+```
+
+All pods should show `1/1 Running` after a few minutes.
+
+## 3. Check Sync Status
+
+```bash
+kubectl get application lgtm-stack -n argocd
+```
+
+Expected status: `Synced` / `Healthy`. If you see `OutOfSync` or errors:
+
+```bash
+kubectl describe application lgtm-stack -n argocd | grep -A 5 "Conditions"
+```
+
+## 4. Access Grafana
+
+```bash
+kubectl port-forward svc/lgtm-stack-grafana 3000:80 -n monitoring
+```
+
+Grafana is then available at `http://localhost:3000`.
+
+## 5. Retrieve Login Password
+
+Username: `admin`. The password is stored as a secret in the cluster:
+
+```bash
+kubectl get secret lgtm-stack-grafana -n monitoring \
+  -o jsonpath="{.data.admin-password}" | base64 --decode
+```
