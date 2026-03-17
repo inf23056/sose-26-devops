@@ -216,7 +216,7 @@ This way, you can then just use `out/${SERVICE}` to start the service.
 
 ## Deploy to Local Cluster
 
-Make sure [Argo CD is installed](https://argo-cd.readthedocs.io/en/stable/getting_started/) in your local cluster and you are logged in.
+Make sure [Argo CD is installed](https://argo-cd.readthedocs.io/en/stable/getting_started/) in your local cluster and `minikube` is running.
 
 Apply all Argo CD Applications:
 
