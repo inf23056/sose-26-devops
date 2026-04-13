@@ -51,11 +51,13 @@ jobs:
             --file sbom-${{ steps.service.outputs.service }}-${{ steps.service.outputs.version }}.cyclonedx.json
 
       - name: Install Grype
-        uses: anchore/scan-action/download-grype@v3
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
       - name: Scan SBOM with Grype for CVEs
         run: |
-          grype sbom:sbom-${{ steps.service.outputs.service }}-${{ steps.service.outputs.version }}.cyclonedx.json \
+          grype db update
+          grype sbom:./sbom-${{ steps.service.outputs.service }}-${{ steps.service.outputs.version }}.cyclonedx.json \
             --output table \
             --fail-on critical
 
