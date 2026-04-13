@@ -39,10 +39,32 @@ jobs:
             --build-arg SERVICE=${{ steps.service.outputs.service }} \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.service.outputs.service }}:${{ steps.service.outputs.version }} \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.service.outputs.service }}:latest \
-            .
+
+      - name: Install Syft
+        uses: anchore/sbom-action/download-syft@v0
+
+      - name: Generate SBOM with Syft (CycloneDX)
+        run: |
+          syft ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.service.outputs.service }}:${{ steps.service.outputs.version }} \
+            -o cyclonedx-json \
+            --file sbom-${{ steps.service.outputs.service }}-${{ steps.service.outputs.version }}.cyclonedx.json
+
+      - name: Install Grype
+        uses: anchore/scan-action/download-grype@v6
+
+      - name: Scan SBOM with Grype for CVEs
+        run: |
+          grype sbom:sbom-${{ steps.service.outputs.service }}-${{ steps.service.outputs.version }}.cyclonedx.json \
+            --output table \
+            --fail-on critical
+
+      - name: Upload SBOM as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ steps.service.outputs.service }}-${{ steps.service.outputs.version }}
+          path: sbom-${{ steps.service.outputs.service }}-${{ steps.service.outputs.version }}.cyclonedx.json
 
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.service.outputs.service }}:${{ steps.service.outputs.version }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.service.outputs.service }}:latest
-
