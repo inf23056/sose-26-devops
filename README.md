@@ -273,3 +273,11 @@ Username: `admin`. The password is stored as a secret in the cluster:
 kubectl get secret lgtm-stack-grafana -n monitoring \
   -o jsonpath="{.data.admin-password}" | base64 --decode
 ```
+
+# Container Image Scanning
+
+The publish workflow automatically scans each built image for CVEs after `docker build`.
+
+* **[Syft](https://github.com/anchore/syft)** generates an SBOM in CycloneDX format (`sbom-<service>-<version>.cyclonedx.json`)
+* **[Grype](https://github.com/anchore/grype)** scans the SBOM – the pipeline fails on **Critical** vulnerabilities
+* The SBOM is uploaded as a GitHub Actions Artifact (Actions → Workflow Run → Artifacts)
