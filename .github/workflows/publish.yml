@@ -51,7 +51,7 @@ jobs:
             --file sbom-${{ steps.service.outputs.service }}-${{ steps.service.outputs.version }}.cyclonedx.json
 
       - name: Install Grype
-        uses: anchore/scan-action/download-grype@v6
+        uses: anchore/scan-action/download-grype@v3
 
       - name: Scan SBOM with Grype for CVEs
         run: |
