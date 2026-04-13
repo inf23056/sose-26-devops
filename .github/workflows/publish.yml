@@ -39,6 +39,7 @@ jobs:
             --build-arg SERVICE=${{ steps.service.outputs.service }} \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.service.outputs.service }}:${{ steps.service.outputs.version }} \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.service.outputs.service }}:latest \
+            .
 
       - name: Install Syft
         uses: anchore/sbom-action/download-syft@v0
