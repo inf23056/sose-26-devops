@@ -29,3 +29,8 @@ __debug*
 
 # output files
 out
+
+# Terraform files
+.terraform/
+*.tfstate
+*.tfstate.backup
